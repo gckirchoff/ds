@@ -46,15 +46,6 @@ func (t *trie) Search(word string) bool {
 	if !isValid(word) {
 		return false
 	}
-	// currentNode := t.root
-	// for _, char := range word {
-	// 	alphabetIndex := char - 'a'
-	// 	if currentNode.children[alphabetIndex] == nil {
-	// 		return false
-	// 	}
-	// 	currentNode = currentNode.children[alphabetIndex]
-	// }
-	// return currentNode.endOfWord
 	finalNode, success := findNode(t.root, word)
 	if !success {
 		return false
@@ -63,48 +54,19 @@ func (t *trie) Search(word string) bool {
 }
 
 func (t *trie) WordOptions(word string) []string {
-	// if !t.Search(word) {
-	// 	return []string{}
-	// }
 	endOfTextNode, success := findNode(t.root, word)
 	if !success {
 		return []string{}
 	}
 	var wordOptions []string
-	// var currentWord string
 	var generateWordOptions func(n *trieNode, index int, wordSoFar string) bool
-	// generateWordOptions = func(n *trieNode, index int, prevEnd bool) bool {
-	// 	if n == nil {
-	// 		return false
-	// 	}
-	// 	letter := string(rune(index) + 'a')
-	// 	currentWord += letter
-	// 	if n.endOfWord {
-	// 		wordOptions = append(wordOptions, currentWord)
-	// 		var hasANode bool
-	// 		for i := 0; i < alphabetLength; i++ {
-	// 			if n.children[i] != nil {
-	// 				hasANode = true
-	// 			}
-	// 		}
-	// 		if !hasANode && !prevEnd {
-	// 			currentWord = ""
-	// 			return true
-	// 		}
-	// 	}
-	// 	for i := 0; i < alphabetLength; i++ {
-	// 		generateWordOptions(n.children[i], i, n.endOfWord)
-	// 	}
-	// 	return true
-	// }
-	// wordMap := make(map[string]bool)
 	generateWordOptions = func(n *trieNode, index int, wordSoFar string) bool {
 		if n == nil {
 			return false
 		}
 		letter := string(rune(index) + 'a')
 		newWord := wordSoFar + letter
-			if n.endOfWord {
+		if n.endOfWord {
 			wordOptions = append(wordOptions, newWord)
 			var hasANode bool
 			for i := 0; i < alphabetLength; i++ {
@@ -121,25 +83,12 @@ func (t *trie) WordOptions(word string) []string {
 		}
 		return true
 	}
-	// for i := 0; i < alphabetLength; i++ {
-	// 	generateWordOptions(endOfTextNode.children[i], i, endOfTextNode.endOfWord)
-	// }
+
 	for i := 0; i < alphabetLength; i++ {
 		generateWordOptions(endOfTextNode.children[i], i, word)
 	}
-	// for i, rootChildNode := range(endOfTextNode.children) {
-	// 	if rootChildNode == nil {
-	// 		continue
-	// 	}
-	// 	currentNode := rootChildNode
-	// }
-
 	return wordOptions
 }
-
-// func (n *trieNode) buildFutureWord() string {
-
-// }
 
 func findNode(starter *trieNode, currentText string) (*trieNode, bool) {
 	currentNode := starter
@@ -152,14 +101,6 @@ func findNode(starter *trieNode, currentText string) (*trieNode, bool) {
 	}
 	return currentNode, true
 }
-
-// func (t *trie) buildWord(currentText string) string {
-// 	var resultString string
-// 	currentNode := t.root
-// 	for _, char := range currentText {
-
-// 	}
-// }
 
 func isValid(word string) bool {
 	myRegex := regexp.MustCompile("[^a-zA-Z]")
