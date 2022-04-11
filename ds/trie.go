@@ -68,13 +68,13 @@ func (t *trie) WordOptions(word string) []string {
 		newWord := wordSoFar + letter
 		if n.endOfWord {
 			wordOptions = append(wordOptions, newWord)
-			var hasANode bool
+			var hasAChildNode bool
 			for i := 0; i < alphabetLength; i++ {
 				if n.children[i] != nil {
-					hasANode = true
+					hasAChildNode = true
 				}
 			}
-			if !hasANode {
+			if !hasAChildNode {
 				return true
 			}
 		}
