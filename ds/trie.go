@@ -7,17 +7,16 @@ import (
 
 const alphabetLength = 26
 
-// Make struct for node
 type trieNode struct {
 	children  [alphabetLength]*trieNode
 	endOfWord bool
 }
 
-// Struct for trie
 type trie struct {
 	root *trieNode
 }
 
+// NewTrie instantiates a new trie
 func NewTrie() *trie {
 	return &trie{&trieNode{}}
 }
@@ -53,6 +52,7 @@ func (t *trie) Search(word string) bool {
 	return finalNode.endOfWord
 }
 
+// WordOptions takes in a string and returns a slice of the possible completions of that string.
 func (t *trie) WordOptions(word string) []string {
 	endOfTextNode, success := findNode(t.root, word)
 	if !success {
