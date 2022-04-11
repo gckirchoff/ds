@@ -4,6 +4,8 @@
 
 ds (short for data structures) is an easy to use, light weight library for implementing various generic data structures such as BSTs, tries, and linked lists in Golang.
 
+`import "github.com/gckirchoff/ds/ds"`
+
 ### Current data structures and methods:
 * Binary Search Tree
     * `Insert(key int, data T) bool`
